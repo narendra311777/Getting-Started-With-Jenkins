@@ -1,0 +1,22 @@
+ agent any  
+ environment {  
+  dotnet = 'C:\\Program Files\\dotnet\\dotnet.exe'  
+ }  
+ stages {  
+  stage('Checkout') {  
+   steps {  
+    git url: 'https://github.com/narendra311777/Getting-Started-With-Jenkins', branch: 'master'  
+   }  
+  }  
+ stage('Build') {  
+   steps {  
+    bat 'dotnet build JenkinsIntegration\\jenkinsIntegration.sln --configuration Release'  
+   }  
+  }  
+  stage('Test') {  
+   steps {  
+    bat 'dotnet test JenkinsIntegration\\JenkinsIntegration.Tests\\JenkinsIntegration.Tests.csproj --logger:trx'  
+   }  
+  }  
+ }  
+}  
